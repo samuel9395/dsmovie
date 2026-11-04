@@ -124,7 +124,7 @@
                 ],
                 "summary": "Get a movie by ID",
                 "description": "Get a movie by ID",
-                "operationId": "findById",
+                "operationId": "findByIdV1",
                 "parameters": [
                     {
                         "name": "id",
@@ -140,6 +140,11 @@
                     "200": {
                         "description": "Ok",
                         "content": {
+                            "application/vdn.devsuperior.dsmovie-v1+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MovieGenreDTO"
+                                }
+                            },
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/MovieDTO"
@@ -349,8 +354,16 @@
                 ],
                 "summary": "List all movies",
                 "description": "Get all movies",
-                "operationId": "findAll",
+                "operationId": "findAllV1",
                 "parameters": [
+                    {
+                        "name": "pageable",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Pageable"
+                        }
+                    },
                     {
                         "name": "title",
                         "in": "query",
@@ -359,20 +372,17 @@
                             "type": "string",
                             "default": ""
                         }
-                    },
-                    {
-                        "name": "pageable",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/components/schemas/Pageable"
-                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "Ok",
                         "content": {
+                            "application/vdn.devsuperior.dsmovie-v1+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PageMovieGenreDTO"
+                                }
+                            },
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/PageMovieDTO"
@@ -465,7 +475,7 @@
                 ],
                 "summary": "List all genres",
                 "description": "Get all genres",
-                "operationId": "findAll_1",
+                "operationId": "findAll",
                 "parameters": [
                     {
                         "name": "pageable",
@@ -497,7 +507,7 @@
                 ],
                 "summary": "Get a genre by ID",
                 "description": "Get a genre by ID",
-                "operationId": "findById_1",
+                "operationId": "findById",
                 "parameters": [
                     {
                         "name": "id",
